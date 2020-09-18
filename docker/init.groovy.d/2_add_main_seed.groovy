@@ -5,8 +5,9 @@ import hudson.plugins.git.BranchSpec;
 import hudson.triggers.SCMTrigger;
 import javaposse.jobdsl.plugin.*;
 import jenkins.model.Jenkins;
+import jenkins.model.GlobalConfiguration;
 
-println "--> create z_seed-jobs"
+println "--> create main seed-job"
 
 def gitSeedScmURL = System.getenv("PROJECT_URL")
 assert gitSeedScmURL != null : "No SEED_JOBS_URL env var provided, but required"
@@ -16,7 +17,7 @@ println "--> seed jobs url: " + gitSeedScmURL
 
 jenkins = Jenkins.instance;
 
-jobName = "main-seed";
+jobName = "main_seed";
 branch = "*/master"
 
 jenkins.items.findAll { job -> job.name == jobName }
@@ -25,7 +26,7 @@ jenkins.items.findAll { job -> job.name == jobName }
 gitTrigger = new SCMTrigger("H * * * *");
 dslBuilder = new ExecuteDslScripts()
 
-dslBuilder.setTargets("jenkins/main-seed")
+dslBuilder.setTargets("jenkins/main_seed")
 dslBuilder.setUseScriptText(false)
 dslBuilder.setIgnoreExisting(false)
 dslBuilder.setIgnoreMissingFiles(false)
@@ -47,5 +48,9 @@ dslProject.createTransientActions();
 dslProject.getPublishersList().add(dslBuilder);
 
 jenkins.add(dslProject, jobName);
+
+println "--> disabling scripts security for job dsl scripts"
+
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
 
 gitTrigger.start(dslProject, true);
