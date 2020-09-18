@@ -1,0 +1,11 @@
+folder('DEV') {
+    description('Project for dev purposes')
+}
+
+folder('TEST') {
+    description('Project for test purposes')
+}
+
+folder('PROD') {
+    description('Project for prod purposes')
+}

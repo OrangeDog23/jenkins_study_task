@@ -2,23 +2,37 @@ folder('PROJECT_1') {
     displayName('Project 1')
     description('Folder for project 1')
     authorization {
-        permissionAll('Bob')
+        permissionAll('Alice')
     }
 }
 
-folder('PROJECT_1/DEV') {
-    description('Project for dev purposes')
-}
+// folder('PROJECT_1/DEV') {
+//     description('Project for dev purposes')
+// }
 
-folder('PROJECT_1/TEST') {
-    description('Project for test purposes')
-}
+// folder('PROJECT_1/TEST') {
+//     description('Project for test purposes')
+// }
 
-folder('PROJECT_1/PROD') {
-    description('Project for prod purposes')
-}
+// folder('PROJECT_1/PROD') {
+//     description('Project for prod purposes')
+// }
 
 folder('PROJECT_2') {
     displayName('Project 2')
     description('Folder for project 2')
+}
+
+
+freeStyleJob('PROJECT_1/project_1_seed') {
+    logRotator(-1, 10)
+    scm {
+	git('https://github.com/OrangeDog23/jenkins_study_task', 'master')
+    }
+    steps {
+	shell('echo hello world')
+	dsl {
+	    external('jenkins/PROJECT_1/project1_seed')
+	}
+    }
 }
