@@ -1,5 +1,24 @@
-job('example') {
-  steps {
-    shell('echo Hello World!')
-  }
+folder('PROJECT_1') {
+    displayName('Project 1')
+    description('Folder for project 1')
+    authorization {
+        permissionAll('Bob')
+    }
+}
+
+folder('PROJECT_1/DEV') {
+    description('Project for dev purposes')
+}
+
+folder('PROJECT_1/TEST') {
+    description('Project for test purposes')
+}
+
+folder('PROJECT_1/PROD') {
+    description('Project for prod purposes')
+}
+
+folder('PROJECT_2') {
+    displayName('Project 2')
+    description('Folder for project 2')
 }
