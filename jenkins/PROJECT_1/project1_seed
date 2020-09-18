@@ -1,11 +1,22 @@
-folder('DEV') {
+folder('PROJECT_1/DEV') {
     description('Project for dev purposes')
 }
 
-folder('TEST') {
+folder('PROJECT_1/TEST') {
     description('Project for test purposes')
 }
 
-folder('PROD') {
+folder('PROJECT_1/PROD') {
     description('Project for prod purposes')
+}
+
+pipelineJob('PROJECT_1/PROD/pipeline1') {
+    definition {
+        cpsScm {
+            scm {
+                git('$PROJECT_URL')
+		scriptPath('jenkins/PROJECT_1/PROD/pipeline1_prod')
+            }
+        }
+    }
 }

@@ -6,6 +6,20 @@ folder('PROJECT_1') {
     }
 }
 
+freeStyleJob('PROJECT_1/project_1_seed') {
+    logRotator(-1, 10)
+    scm {
+	git('$PROJECT_URL', '*/master')
+    }
+    steps {
+	shell('echo hello world')
+	dsl {
+	    external('jenkins/PROJECT_1/project1_seed')
+	}
+    }
+}
+
+
 // folder('PROJECT_1/DEV') {
 //     description('Project for dev purposes')
 // }
@@ -23,16 +37,17 @@ folder('PROJECT_2') {
     description('Folder for project 2')
 }
 
-
-freeStyleJob('PROJECT_1/project_1_seed') {
+freeStyleJob('PROJECT_2/project_2_seed') {
     logRotator(-1, 10)
     scm {
-	git('https://github.com/OrangeDog23/jenkins_study_task', 'master')
+	git('$PROJECT_URL', '*/master')
     }
     steps {
 	shell('echo hello world')
 	dsl {
-	    external('jenkins/PROJECT_1/project1_seed')
+	    external('jenkins/PROJECT_2/project2_seed')
 	}
     }
 }
+
+
