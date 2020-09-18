@@ -20,5 +20,5 @@ userBob.save()
 jenkins.getAuthorizationStrategy().add(Jenkins.READ, "Alice")
 jenkins.getAuthorizationStrategy().add(Jenkins.READ, "Bob")
 jenkins.save()
-print("users added successfully \n")
+print("--> users added successfully \n")
 

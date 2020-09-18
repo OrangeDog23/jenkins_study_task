@@ -1,11 +1,10 @@
-import hudson.model.FreeStyleProject;
-import hudson.plugins.git.GitSCM;
-import hudson.plugins.git.UserRemoteConfig;
-import hudson.plugins.git.BranchSpec;
-import hudson.triggers.SCMTrigger;
-import javaposse.jobdsl.plugin.*;
-import jenkins.model.Jenkins;
-import jenkins.model.GlobalConfiguration;
+import hudson.model.FreeStyleProject
+import hudson.plugins.git.GitSCM
+import hudson.plugins.git.UserRemoteConfig
+import hudson.plugins.git.BranchSpec
+import hudson.triggers.SCMTrigger
+import javaposse.jobdsl.plugin.*
+import jenkins.model.Jenkins
 
 println "--> create main seed-job"
 
@@ -48,9 +47,5 @@ dslProject.createTransientActions();
 dslProject.getPublishersList().add(dslBuilder);
 
 jenkins.add(dslProject, jobName);
-
-println "--> disabling scripts security for job dsl scripts"
-
-GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
 
 gitTrigger.start(dslProject, true);
