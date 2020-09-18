@@ -17,8 +17,8 @@ def userAlice = jenkins.getSecurityRealm().createAccount("Alice", "AlicePassword
 userAlice.save()
 def userBob = jenkins.getSecurityRealm().createAccount("Bob", "BobPassword")
 userBob.save()
-jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, "Alice")
-jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, "Bob")
-
+jenkins.getAuthorizationStrategy().add(Jenkins.READ, "Alice")
+jenkins.getAuthorizationStrategy().add(Jenkins.READ, "Bob")
 jenkins.save()
-print('users added successfully')
+print("users added successfully \n")
+

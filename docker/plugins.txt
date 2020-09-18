@@ -69,3 +69,4 @@ pam-auth:1.6
 script-security:1.74
 snakeyaml-api:1.27.0
 pipeline-graph-analysis:1.10
+job-dsl:1.77
