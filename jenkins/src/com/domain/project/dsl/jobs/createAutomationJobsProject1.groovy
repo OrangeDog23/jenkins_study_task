@@ -14,8 +14,8 @@ pipelineJob('PROJECT_1/PROD/pipeline1') {
     definition {
         cpsScm {
             scm {
-                git('$PROJECT_URL')
-		scriptPath('jenkins/PROJECT_1/PROD/pipeline1_prod')
+                git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
+		scriptPath('jenkins/src/com/domain/project/dsl/factory/GenerateJobFactory1.groovy')
             }
         }
     }

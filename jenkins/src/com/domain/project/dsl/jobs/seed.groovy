@@ -9,28 +9,15 @@ folder('PROJECT_1') {
 freeStyleJob('PROJECT_1/project_1_seed') {
     logRotator(-1, 10)
     scm {
-	git('$PROJECT_URL', '*/master')
+	git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
     }
     steps {
-	shell('echo hello world')
+	shell('echo "Creating project 1 seed job"')
 	dsl {
-	    external('jenkins/PROJECT_1/project1_seed')
+	    external('jenkins/src/com/domain/project/dsl/jobs/createAutomationJobsProject1.groovy')
 	}
     }
 }
-
-
-// folder('PROJECT_1/DEV') {
-//     description('Project for dev purposes')
-// }
-
-// folder('PROJECT_1/TEST') {
-//     description('Project for test purposes')
-// }
-
-// folder('PROJECT_1/PROD') {
-//     description('Project for prod purposes')
-// }
 
 folder('PROJECT_2') {
     displayName('Project 2')
@@ -40,12 +27,12 @@ folder('PROJECT_2') {
 freeStyleJob('PROJECT_2/project_2_seed') {
     logRotator(-1, 10)
     scm {
-	git('$PROJECT_URL', '*/master')
+	git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
     }
     steps {
-	shell('echo hello world')
+	shell('echo "Creating project 2 seed job"')
 	dsl {
-	    external('jenkins/PROJECT_2/project2_seed')
+	    external('jenkins/src/com/domain/project/dsl/jobs/createAutomationJobsProject2.groovy')
 	}
     }
 }
