@@ -1,9 +1,6 @@
 folder('PROJECT_1') {
     displayName('Project 1')
     description('Folder for project 1')
-    authorization {
-        permissionAll('Alice')
-    }
 }
 
 freeStyleJob('PROJECT_1/project_1_seed') {
