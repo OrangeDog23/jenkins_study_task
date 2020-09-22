@@ -1,0 +1,34 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "${JENKINS_USER}"
+        name: "${JENKINS_USER}"
+        password: "${JENKINS_PASS}"
+        properties:
+        - "apiToken"
+        - "mailer"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+      - id: "Alice"
+        name: "Alice"
+        password: "AlicePassword"
+        properties:
+        - "apiToken"
+        - "mailer"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+      - id: "Bob"
+        name: "Bob"
+        password: "BobPassword"
+        properties:
+        - "apiToken"
+        - "mailer"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+

@@ -1,0 +1,12 @@
+jobs:
+  - script: >
+      freeStyleJob('main-seed') {
+          scm {
+              git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
+          }
+          steps {
+              dsl {
+                  external('jenkins/src/com/domain/project/dsl/jobs/seed.groovy')
+            }
+          }
+      }

@@ -1,5 +1,3 @@
-
-
 pipelineJob('PROJECT_2/pipeline1') {
     definition {
         cpsScm {

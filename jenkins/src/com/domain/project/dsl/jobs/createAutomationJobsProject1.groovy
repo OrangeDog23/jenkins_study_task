@@ -10,13 +10,43 @@ folder('PROJECT_1/PROD') {
     description('Project for prod purposes')
 }
 
+pipelineJob('PROJECT_1/TEST/pipeline1') {
+    definition {
+        cpsScm {
+            scm {
+                git("$PROJECT_URL", '*/master', {node -> node / 'extensions' << '' })
+		scriptPath('jenkins/pipelines/pipeline1_1.groovy')
+            }
+        }
+    }
+    environmentVariables(ENVIRONMENT: 'TEST')
+}
+
+
+pipelineJob('PROJECT_1/DEV/pipeline1') {
+    definition {
+        cpsScm {
+            scm {
+                git("$PROJECT_URL", '*/master', {node -> node / 'extensions' << '' })
+		scriptPath('jenkins/pipelines/pipeline1_1.groovy')
+            }
+        }
+    }
+    environmentVariables {
+	environmentVariables(ENVIRONMENT: 'DEV')
+    }
+}
+
 pipelineJob('PROJECT_1/PROD/pipeline1') {
     definition {
         cpsScm {
             scm {
-                git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
-		scriptPath('jenkins/src/com/domain/project/dsl/factory/GenerateJobFactory1.groovy')
+                git("$PROJECT_URL", '*/master', {node -> node / 'extensions' << '' })
+		scriptPath('jenkins/pipelines/pipeline1_1.groovy')
             }
         }
     }
+    environmentVariables(ENVIRONMENT: 'PROD')
 }
+
+
