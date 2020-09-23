@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:2.257
 USER jenkins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt  --latest false
 #COPY init.groovy.d /var/jenkins_home/init.groovy.d
 COPY casc_configs /var/jenkins_home/casc_configs
 ENV JENKINS_USER=Dmitry
