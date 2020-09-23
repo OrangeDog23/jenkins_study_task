@@ -20,7 +20,7 @@ for (String env_name : environments) {
     }
     
     // pipeline 2 definition
-    pipelineJob('PROJECT_1/' + env_name + '/pipeline1') {
+    pipelineJob('PROJECT_1/' + env_name + '/pipeline2') {
 	definition {
             cpsScm {
 		scm {
