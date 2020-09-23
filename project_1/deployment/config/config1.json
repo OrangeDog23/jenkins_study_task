@@ -1,0 +1,6 @@
+{
+    "first_line": "first_value_config_1",
+    "second_line": {
+	"second_line_inner": "second_value_config_1"
+    }
+}
