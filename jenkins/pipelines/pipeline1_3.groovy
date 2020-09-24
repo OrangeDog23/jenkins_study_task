@@ -1,6 +1,7 @@
-def json_files
-def chosen_config
-def config
+def skip_stage = "${env.skip_stage}"
+def input_string = "${env.input_string}"
+def chosen_config = "${env.chosen_config}"
+def config_path = "${env.CONFIG_PATH}"
 
 pipeline {
     agent any
@@ -10,42 +11,17 @@ pipeline {
                 echo "Pipeline for testing input values abilities for jenkins"
             }
         }
-	stage('Static input values') {
-	    input {
-		message 'Enter test values'
-		ok 'Ok'
-		parameters {
-		    string(name: 'INPUT_STR', defaultValue: 'STRING', description: 'Input value')
-		    text(name: 'INPUT_TEXT', defaultValue: 'TEXT', description: 'Input text')
-		    booleanParam(name: 'SKIP_STEPS', defaultValue: false, description: 'skip this stage')
-		}
-	    }
-	    when { equals expected: "false", actual: SKIP_STEPS }
+	stage('print input variables') {
+	    when { equals expected: "false", actual: skip_stage }
 	    steps {
-		echo "INPUT_STR: ${INPUT_STR}"
-		echo "INPUT_TEXT ${INPUT_TEXT}"
-	    }
-	}
-	stage('Dynamic input values') {
-	    steps {
-		script {
-		    json_files = get_json_files()
-		    echo json_files.toString()
-		    chosen_config = input id: 'chosen_config', message: 'Choose config',
-			parameters: [
-			choice (
-			    choices: json_files, name: 'config',
-			    description: 'choose appropriate config'
-			)
-		    ]
-		    echo "${chosen_config}"
-		}
+		echo input_string
+		echo chosen_config
 	    }
 	}
 	stage('Get data from json config') {
 	    steps {
 		script {
-		    config = readJSON file: chosen_config
+		    config = readJSON file: config_path + chosen_config
 		    config.each { key, value ->
 			echo "Walked through key $key and value $value"
 		    }
@@ -55,12 +31,12 @@ pipeline {
     }
 }
 
-def get_json_files() {
-    def files = ''
-    files = findFiles(glob: "project_1/deployment/config/*.json")
-    def json_files = []
-    for (file in files) {
-	json_files.add(file.path.toString())
-    }
-    return json_files
-}
+// def get_json_files() {
+//     def files = ''
+//     files = findFiles(glob: "project_1/deployment/config/*.json")
+//     def json_files = []
+//     for (file in files) {
+// 	json_files.add(file.path.toString())
+//     }
+//     return json_files
+// }

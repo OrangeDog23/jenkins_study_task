@@ -3,7 +3,7 @@ folder('PROJECT_1') {
     description('Folder for project 1')
 }
 
-freeStyleJob('PROJECT_1/project_1_seed') {
+job('PROJECT_1/project_1_seed') {
     logRotator(-1, 10)
     scm {
 	git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
@@ -21,7 +21,7 @@ folder('PROJECT_2') {
     description('Folder for project 2')
 }
 
-freeStyleJob('PROJECT_2/project_2_seed') {
+job('PROJECT_2/project_2_seed') {
     logRotator(-1, 10)
     scm {
 	git('$PROJECT_URL', '*/master', {node -> node / 'extensions' << '' })
